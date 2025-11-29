@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QNS Al-Khayr | Giving with Purpose</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    :root {
+      --primary: #053551;
+      --accent1: #B63764;
+      --accent2: #A0C01C;
+      --bg: #f8fbff;
+      --text: #0b1a2b;
+      --muted: #5f7186;
+      --card-shadow: 0 12px 30px rgba(5, 53, 81, 0.08);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .nav-links a {
+      font-weight: 500;
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 8px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--primary); background: rgba(5,53,81,0.06); }
+    .donate-mini {
+      background: var(--accent1);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 24px rgba(182,55,100,0.25);
+    }
+    .donate-mini:hover { transform: translateY(-2px); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 4px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 70px 20px; }
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: center;
+      gap: 40px;
+      padding-top: 40px;
+    }
+    .headline {
+      font-size: clamp(2rem, 3vw + 1rem, 3.2rem);
+      margin-bottom: 16px;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+    .hero p { color: var(--muted); margin-bottom: 20px; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent1), #c2487b);
+      color: #fff;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 18px 35px rgba(182,55,100,0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-secondary {
+      background: #fff;
+      color: var(--primary);
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 2px solid rgba(5,53,81,0.12);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .btn-secondary:hover { background: rgba(5,53,81,0.06); transform: translateY(-2px); }
+    .hero-visual {
+      background: linear-gradient(135deg, rgba(5,53,81,0.12), rgba(160,192,28,0.18));
+      border-radius: 18px;
+      min-height: 320px;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px dashed rgba(5,53,81,0.25);
+      border-radius: 14px;
+    }
+    .section-title {
+      font-size: 1.9rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .section-sub { color: var(--muted); margin-bottom: 28px; }
+    .about-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: stretch; }
+    .about-text p { color: var(--muted); }
+    .about-cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .about-card {
+      background: #fff;
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+    .about-card h3 { margin: 0; color: var(--primary); }
+    .about-card p { margin: 0; color: var(--muted); }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 16px; }
+    .stat-card {
+      background: #fff;
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      text-align: center;
+    }
+    .stat-card h3 { margin: 0; color: var(--accent2); font-size: 1.4rem; }
+    .stat-card span { color: var(--muted); font-size: 0.95rem; }
+    .campaign-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .card {
+      background: #fff;
+      padding: 18px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+    .card h3 { margin: 0; color: var(--primary); font-size: 1.1rem; }
+    .card p { color: var(--muted); }
+    .card .learn-btn {
+      margin-top: auto;
+      align-self: flex-start;
+      background: transparent;
+      color: var(--accent1);
+      border: 1px solid rgba(182,55,100,0.4);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .card .learn-btn:hover { background: rgba(182,55,100,0.08); }
+    .impact {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+    .impact p { color: var(--muted); }
+    .story-card {
+      background: #fff;
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      margin-bottom: 14px;
+    }
+    .story-card h4 { margin: 0 0 8px; color: var(--primary); }
+    .ways-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .ways-highlight {
+      background: linear-gradient(135deg, rgba(5,53,81,0.9), rgba(5,53,81,0.75));
+      color: #e9f1fb;
+      padding: 18px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .ways-highlight h3 { margin: 0; color: #fff; }
+    .ways-highlight p { margin: 0; color: #d6e2f0; }
+    .faq-item {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 16px;
+      color: var(--muted);
+    }
+    .faq-item.active .faq-answer { max-height: 200px; padding: 0 16px 16px; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    form { display: grid; gap: 12px; }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(5,53,81,0.15);
+      font-family: inherit;
+      font-size: 1rem;
+      background: #fff;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    footer {
+      background: #011828;
+      color: #dce7f2;
+      padding: 28px 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    footer a { color: #dce7f2; margin: 0 8px; text-decoration: underline; }
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        right: 20px;
+        background: #fff;
+        box-shadow: var(--card-shadow);
+        padding: 14px;
+        border-radius: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 200px;
+        display: none;
+      }
+      .nav-links.show { display: flex; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">QNS Al-Khayr</div>
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-links" id="nav-links">
+        <a href="#home">Home</a>
+        <a href="#campaigns">Campaigns</a>
+        <a href="#give">Ways to Give</a>
+        <a href="#impact">Impact</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <button class="donate-mini" data-scroll="#give">Donate</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="container hero" aria-labelledby="hero-title">
+      <div>
+        <h1 class="headline" id="hero-title">Giving with Purpose. Serving with Ihsan.</h1>
+        <p>QNS Al-Khayr is committed to transforming generosity into lasting change. We empower communities through faith-led compassion, transparent stewardship, and impactful projects that uplift lives with dignity.</p>
+        <div class="btn-row">
+          <button class="btn-primary" data-scroll="#give">Donate now</button>
+          <button class="btn-secondary" data-scroll="#campaigns">View campaigns</button>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Hero image placeholder"></div>
+    </section>
+
+    <section class="container" id="about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title">Who We Are</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>We are a community-rooted charity dedicated to serving with excellence. Our mission is guided by ihsan — striving for beauty and excellence in every act of giving.</p>
+          <p>Through transparent reporting and community partnership, we deliver aid where it matters most, ensuring every donation is treated as an amanah and invested responsibly.</p>
+          <div class="stats">
+            <div class="stat-card"><h3>150+</h3><span>Families supported</span></div>
+            <div class="stat-card"><h3>45</h3><span>Active volunteers</span></div>
+            <div class="stat-card"><h3>18</h3><span>Countries reached</span></div>
+            <div class="stat-card"><h3>95%</h3><span>Funds to programs</span></div>
+          </div>
+        </div>
+        <div class="about-cards">
+          <div class="about-card">
+            <h3>Mission</h3>
+            <p>We work to share a true understanding of Islam across England, Wales, and Bangladesh— nurturing spiritual growth, promoting compassion, and serving humanity. Guided by faith and commitment to public benefit, we support underprivileged students, assist people facing hardship, and help build educational and religious institutions that strengthen communities through hope, dignity, and care.</p>
+          </div>
+          <div class="about-card">
+            <h3>Vision</h3>
+            <p>A world where faith and service stand together— where mosques, schools, and community programmes empower people to live with knowledge, unity, and hope. We aspire to see communities empowered through education and guided by Islamic values, creating a future where every individual can flourish with dignity, purpose, and opportunity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="campaigns" aria-labelledby="campaigns-title">
+      <h2 class="section-title" id="campaigns-title">Our Key Campaigns</h2>
+      <p class="section-sub">Explore the initiatives that bring immediate relief and long-term resilience to communities in need.</p>
+      <div class="campaign-grid">
+        <div class="card"><h3>Masjid Building</h3><p>Supporting sacred spaces that anchor communities in faith, learning, and connection.</p><button class="learn-btn">Learn more</button></div>
+        <div class="card"><h3>Education Projects</h3><p>Creating pathways to knowledge through classrooms, resources, and training.</p><button class="learn-btn">Learn more</button></div>
+        <div class="card"><h3>Feed the Fasting</h3><p>Providing nutritious meals to families and individuals during the blessed months.</p><button class="learn-btn">Learn more</button></div>
+        <div class="card"><h3>Sponsor a Student</h3><p>Pairing donors with learners to cover fees, supplies, and mentoring support.</p><button class="learn-btn">Learn more</button></div>
+        <div class="card"><h3>Medical Treatment</h3><p>Funding urgent care, surgeries, and medication for those facing hardship.</p><button class="learn-btn">Learn more</button></div>
+        <div class="card"><h3>Water Wells</h3><p>Delivering clean water access through wells, filtration, and sanitation projects.</p><button class="learn-btn">Learn more</button></div>
+        <div class="card"><h3>House Building</h3><p>Constructing safe homes that restore dignity and stability for vulnerable families.</p><button class="learn-btn">Learn more</button></div>
+      </div>
+    </section>
+
+    <section class="container" id="impact" aria-labelledby="impact-title">
+      <h2 class="section-title" id="impact-title">Why Your Donation Matters</h2>
+      <div class="impact">
+        <div>
+          <p>Every contribution fuels projects designed with local voices, ensuring aid is culturally sensitive and sustainable. We prioritize measurable results and share transparent updates with our donors.</p>
+          <p>Your support helps deliver emergency relief, build long-term resilience, and nurture hope in communities navigating poverty, displacement, and disaster.</p>
+          <p>By partnering with QNS Al-Khayr, you invest in trust, impact, and the collective responsibility to uplift our ummah and neighbors with dignity.</p>
+        </div>
+        <div>
+          <div class="story-card">
+            <h4>Emergency Relief Story</h4>
+            <p>Families received food packs, shelter materials, and healthcare within 72 hours of crisis thanks to rapid donor response.</p>
+          </div>
+          <div class="story-card">
+            <h4>Education Story</h4>
+            <p>A rural school gained solar-powered classrooms and training, enabling hundreds of students to learn safely and confidently.</p>
+          </div>
+          <div class="story-card">
+            <h4>Water Story</h4>
+            <p>New wells and hygiene workshops reduced waterborne illnesses and restored dignity for entire villages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="give" aria-labelledby="give-title">
+      <h2 class="section-title" id="give-title">Ways to Give</h2>
+      <p class="section-sub">Choose the method that suits you best—every gift brings relief and hope.</p>
+      <div class="ways-highlight">
+        <h3>Quick Donate</h3>
+        <p>Ready to contribute right away? Use our preferred donation form for a smoother checkout experience and to keep your gift aligned with current campaigns.</p>
+        <div class="btn-row">
+          <button class="btn-primary" data-scroll="#contact">Donate now</button>
+          <button class="btn-secondary" data-scroll="#campaigns">View campaigns</button>
+        </div>
+      </div>
+      <div class="ways-grid">
+        <div class="card"><h3>Online Card Payment</h3><p>Donate securely through our online portal with instant confirmation and receipts.</p></div>
+        <div class="card"><h3>Direct Debit / GoCardless</h3><p>Set up automated monthly gifts to sustain vital programs year-round.</p></div>
+        <div class="card"><h3>Bank Transfer</h3><p>Account Name: QNS Al-Khayr<br>IBAN: XX00 0000 0000 0000<br>Ref: Your Name</p></div>
+        <div class="card"><h3>In-Person Cash</h3><p>Visit our community center to contribute directly and learn about current needs.</p></div>
+      </div>
+    </section>
+
+    <section class="container" id="faq" aria-labelledby="faq-title">
+      <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question">How are donations allocated? <span>+</span></div>
+        <div class="faq-answer"><p>We allocate funds based on project urgency and donor intent, prioritizing transparency and impact.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Can I receive regular updates? <span>+</span></div>
+        <div class="faq-answer"><p>Yes, donors receive periodic reports detailing project milestones and stories from the field.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Is my donation tax deductible? <span>+</span></div>
+        <div class="faq-answer"><p>We provide receipts for eligible donations; please consult local guidance for applicability.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Can I volunteer with QNS Al-Khayr? <span>+</span></div>
+        <div class="faq-answer"><p>We welcome volunteers year-round. Reach out through our contact form to get involved.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How do you ensure accountability? <span>+</span></div>
+        <div class="faq-answer"><p>We audit projects, partner with trusted local teams, and share transparent financial summaries.</p></div>
+      </div>
+    </section>
+
+    <section class="container" id="contact" aria-labelledby="contact-title">
+      <h2 class="section-title" id="contact-title">Contact</h2>
+      <p class="section-sub">We would love to hear from you. Share your questions or ideas.</p>
+      <div class="contact-grid">
+        <form>
+          <input type="text" name="name" placeholder="Full Name" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+          <textarea name="message" placeholder="Your message" required></textarea>
+          <button type="submit" class="btn-primary">Send message</button>
+        </form>
+        <div class="card">
+          <h3>Reach Us</h3>
+          <p>Email: hello@qnsalkhayr.org</p>
+          <p>Phone: +44 (0)1234 567890</p>
+          <p>City: London, UK</p>
+          <p>Office Hours: Mon–Fri, 9am–5pm</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2024 QNS Al-Khayr. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Donation Terms</a></p>
+  </footer>
+
+  <script>
+    const navLinks = document.getElementById('nav-links');
+    const hamburger = document.getElementById('hamburger');
+    const toggleNav = () => {
+      const isOpen = navLinks.classList.toggle('show');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    };
+    hamburger.addEventListener('click', toggleNav);
+    hamburger.addEventListener('keypress', (e) => { if (e.key === 'Enter') toggleNav(); });
+
+    document.querySelectorAll('[data-scroll], .nav-links a').forEach(el => {
+      el.addEventListener('click', (e) => {
+        const target = e.currentTarget.getAttribute('data-scroll') || e.currentTarget.getAttribute('href');
+        if (target && target.startsWith('#')) {
+          e.preventDefault();
+          document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
+          navLinks.classList.remove('show');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => item.classList.toggle('active'));
+    });
+  </script>
+</body>
+</html>
